@@ -1,0 +1,97 @@
+// QUESTÃO 3
+#include <GL/glut.h>
+
+float squareY = 0.0f; // Posição inicial do quadrado
+const float moveStep = 0.1f; // Valor da translação
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glPushMatrix();
+    glTranslatef(0.0f, squareY, 0.0f); // Translada o quadrado no eixo Y
+    
+    glColor3f(1.0f, 0.0f, 0.0f); // Cor vermelha
+    glBegin(GL_QUADS);
+        glVertex2f(-0.2f, -0.2f);
+        glVertex2f( 0.2f, -0.2f);
+        glVertex2f( 0.2f,  0.2f);
+        glVertex2f(-0.2f,  0.2f);
+    glEnd();
+    
+    glPopMatrix();
+    glFlush();
+}
+
+void keyboard(unsigned char key, int x, int y) {
+    if (key == 32) { // Código ASCII para espaço
+        squareY += moveStep; // Move o quadrado para cima
+        glutPostRedisplay(); // Atualiza a tela
+    }
+}
+
+void init() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fundo branco
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1, 1, -1, 1);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Quadrado Móvel");
+    init();
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutMainLoop();
+    return 0;
+}// QUESTÃO 3
+#include <GL/glut.h>
+
+float squareY = 0.0f; // Posição inicial do quadrado
+const float moveStep = 0.1f; // Valor da translação
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glPushMatrix();
+    glTranslatef(0.0f, squareY, 0.0f); // Translada o quadrado no eixo Y
+    
+    glColor3f(1.0f, 0.0f, 0.0f); // Cor vermelha
+    glBegin(GL_QUADS);
+        glVertex2f(-0.2f, -0.2f);
+        glVertex2f( 0.2f, -0.2f);
+        glVertex2f( 0.2f,  0.2f);
+        glVertex2f(-0.2f,  0.2f);
+    glEnd();
+    
+    glPopMatrix();
+    glFlush();
+}
+
+void keyboard(unsigned char key, int x, int y) {
+    if (key == 32) { // Código ASCII para espaço
+        squareY += moveStep; // Move o quadrado para cima
+        glutPostRedisplay(); // Atualiza a tela
+    }
+}
+
+void init() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fundo branco
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1, 1, -1, 1);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Quadrado Móvel");
+    init();
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutMainLoop();
+    return 0;
+}
