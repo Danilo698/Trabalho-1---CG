@@ -1,0 +1,57 @@
+// QUESTÃO 4
+#include <GL/glut.h>
+
+float squareX = -0.8f; // Posição inicial do quadrado
+float speed = 0.01f; // Velocidade de movimento
+bool movingRight = true; // Direção do movimento
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glPushMatrix();
+    glTranslatef(squareX, 0.0f, 0.0f); // Move o quadrado no eixo X
+
+    glColor3f(0.5f, 0.0f, 0.5f); // Cor roxa
+    glBegin(GL_QUADS);
+    glVertex2f(-0.2f, -0.2f);
+    glVertex2f(0.2f, -0.2f);
+    glVertex2f(0.2f, 0.2f);
+    glVertex2f(-0.2f, 0.2f);
+    glEnd();
+
+    glPopMatrix();
+    glFlush();
+}
+
+void update(int value) {
+    if (movingRight) {
+        squareX += speed;
+        if (squareX > 0.8f) movingRight = false;
+    }
+    else {
+        squareX -= speed;
+        if (squareX < -0.8f) movingRight = true;
+    }
+
+    glutPostRedisplay();
+    glutTimerFunc(16, update, 0); // Aproximadamente 60 FPS
+}
+
+void init() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Fundo branco
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1, 1, -1, 1);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Quadrado Animado");
+    init();
+    glutDisplayFunc(display);
+    glutTimerFunc(16, update, 0);
+    glutMainLoop();
+    return 0;
+}
